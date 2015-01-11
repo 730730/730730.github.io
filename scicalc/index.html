@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<title>KSP Science Calculator</title>
+		<link rel='shortcut icon' type='image/x-icon' href='favicon.ico'>
+		<style>
+			body {
+				font-family: arial;
+			}
+			#result {
+				font-weight: bold;
+				color: blue;
+			}
+			p {
+				position: absolute;
+				top: 90%;
+			}
+		</style>
+	</head>
+	<body>
+		<select id='body'>
+			<option>Moho</option>
+			<optgroup label='Eve'>
+				<option>Eve</option>
+				<option>Gilly</option>
+			</optgroup>
+			<optgroup label='Kerbin'>
+				<option selected>Kerbin</option>
+				<option>Mun</option>
+				<option>Minmus</option>
+			</optgroup>
+			<optgroup label='Duna'>
+				<option>Duna</option>
+				<option>Ike</option>
+			</optgroup>
+			<option>Dres</option>
+			<optgroup label='Jool'>
+				<option>Jool</option>
+				<option>Laythe</option>
+				<option>Vall</option>
+				<option>Tylo</option>
+				<option>Bop</option>
+				<option>Pol</option>
+			</optgroup>
+			<option>Eeloo</option>
+		</select>
+		<select id='exp'>
+			<option>Crew Report</option>
+			<option>EVA Report</option>
+			<option id='srf'>Surface Sample</option>
+			<option>Mystery Goo</option>
+			<option>Materials Study</option>
+			<option>Temperature Scan</option>
+			<option id='atm'>Atmospheric Pressure Scan</option>
+			<option id='seismic'>Seismic Scan</option>
+			<option>Gravity Scan</option>
+			<option id='atm2'>Atmosphere Analyisis</option>
+		</select>
+		<br><br>
+		<input type='radio' name='a' id='rSurf' checked>Surface</input>
+		<input type='radio' name='a' id='rLow'>Atmosphere/Low Space</input>
+		<input type='checkbox' id='proc'>Process</input>
+		<br><br>
+		<button id='btn'>Recover</button>
+		<button id='btn2'>Transmit</button>
+		<br><br>
+		<div id='result'></div>
+		<p>Based on data from the <a href='http://wiki.kerbalspaceprogram.com/wiki/Science'>KSP Wiki</a>.
+		<script src='main.js'></script>
+	</body>
+</html>
