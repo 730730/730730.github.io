@@ -1,0 +1,120 @@
+<html>
+	<head>
+		<title> The Binding of Isaac: Rebirth Log Parser</title>
+		<link rel='shortcut icon' href='favicon.ico' type='image/x-icon'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
+		<style type="text/css">
+			body {
+				font-family: 'Open Sans';
+				font-weight: 100;
+				background: #2B2B2B;
+			}
+			table {
+				border-collapse: collapse;
+			}
+			tr {
+				border-bottom: 1px solid #424141;
+			}
+			#header {
+				color: white;
+				font-size: 23px;
+			}
+			#txtAndButton {
+				margin-top: 10px;
+			}
+			#txt {
+				width: 270px;
+				height: 210px;
+				box-shadow: 0px 0px 20px 0px black;
+			}
+			#wrapper {
+				box-shadow: 0px 0px 20px 0px black;
+				position: absolute;
+				top: 50px;
+				left: 300px;
+			}
+			#seed0 {
+				border-top: 2px solid #919191;
+			}
+			.button {
+				border-radius: 10px 10px 10px 10px;
+				background: #5AB526;
+				width: 135px;
+				height: 40px;
+				color: white;
+				text-align: center;
+				font-size: 25px;
+				margin-top: 20px;
+				box-shadow: 0px 0px 20px 0px black;
+				-webkit-user-select: none;
+			    -khtml-user-select: none;
+			    -moz-user-select: none;
+			    -ms-user-select: none;
+			}
+			.button:hover {
+				background: #6DDA30;
+			}
+			.button:active {
+				background: #408319;
+			}
+			.seed {
+				background: #919191;
+				color: white;
+				width: 250px;
+				height: 28px;
+				font-size: 20px;
+				vertical-align: middle;
+    			display: block;
+    			text-indent: 37px;
+    			z-index: 1;
+    			border-top: 2px solid #7C7C7C;
+    			-webkit-user-select: none;
+			    -khtml-user-select: none;
+			    -moz-user-select: none;
+			    -ms-user-select: none;
+			}
+			.arrowRight {
+				width: 0;
+				height: 0;
+			    border-top: 8px solid transparent;
+			    border-bottom: 8px solid transparent;
+			    border-left: 8px solid rgb(87, 87, 87);
+			    position: absolute;
+			    margin-left: 17;
+			    margin-top: 6px;
+			}
+			.arrowDown {
+				width: 0;
+				height: 0;
+				border-top: 8px solid rgb(87, 87, 87);
+				border-right: 8px solid transparent;
+				border-left: 8px solid transparent;
+				position: absolute;
+				margin-left: 11px;
+				margin-top: 10px;
+			}
+			.collectibles {
+				background: #545454;
+				width: 250px;
+				box-shadow: inset 0px 11px 8px -10px black, inset 0px -11px 6px -10px black;
+				z-index: -1;
+				display: inline-table;
+				position: relative;
+				font-weight: 100;
+			}
+			.hidden {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='header'>The Binding of Isaac: Rebirth Log Parser</div>
+		<div id='txtAndButton'>
+			<textarea id="txt"></textarea>
+			<div id='button' class='button' onclick='main()'>Parse</div>
+		</div>
+		<div id='wrapper'></div>
+		<script type="text/javascript" src="main.js"></script>
+	</body>
+</html>
