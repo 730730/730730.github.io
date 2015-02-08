@@ -40,7 +40,11 @@ function main(){
 		//Get raw collectible strings (e.g. "collectible 1 (Sad Onion)"). I didn't manage to find a regex that would
 		//get me just the item (in this example, "Sad Onion")
 		var collectibles = textChunks[i].match(/collectible [0-9]{1,3} \(.+\)/g);
-		//Transform evey collectible string into just the item (e.g. "collectible 1 (Sad Onion)" --> "Sad Onion")
+		//Prevent catastrophic errors
+		if (collectibles == null) {
+			collectibles = new Array();
+		}
+		//Transform every collectible string into just the item (e.g. "collectible 1 (Sad Onion)" --> "Sad Onion")
 		for (var j = 0; j < collectibles.length; j++) {
 			collectibles[j] = collectibles[j].split(/collectible [0-9]{1,3} \(|\)/).slice(1, 2).join();
 		}
