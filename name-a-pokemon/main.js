@@ -1,5 +1,5 @@
 /*TODO:
--10 seconds to guess
+-10 seconds to guess (or more/less)
 ---ONLINE---
 */
 
@@ -10,6 +10,22 @@ var letterIndex;
 var input = document.getElementById("input");
 var letter = document.getElementById("letter");
 
+function save() {
+	localStorage['pokeList'] = JSON.stringify(pokeList);
+	localStorage['letters'] = JSON.stringify(letters);
+}
+
+function load() {
+	if (localStorage['pokeList'] && localStorage['letters']) {
+		pokeList = JSON.parse(localStorage['pokeList']);
+		letters = JSON.parse(localStorage['letters']);
+	}
+}
+
+function resetStorage() {
+	localStorage['pokeList'] = '';
+	localStorage['letters'] = '';
+}
 //Selects random letter
 function getLetter() {
 	letterIndex = Math.floor(Math.random() * letters.length);
@@ -41,11 +57,15 @@ input.onkeypress = function(e) {
 			previousItem = pokeList[pokeIndex - 1];
 			nextItem = pokeList[pokeIndex + 1];
 			//Remove letter if all Pokémon with it have been entered already
-			if (previousItem.indexOf(selectedLetter) != 0 && nextItem.indexOf(selectedLetter) != 0) {
+			if (previousItem.indexOf(selectedLetter.toLowerCase()) != 0 && nextItem.indexOf(selectedLetter.toLowerCase()) != 0) {
+				console.log(previousItem.indexOf(selectedLetter));
+				console.log(nextItem.indexOf(selectedLetter));
+				console.log('removed letter');
 				letters.splice(letterIndex, 1);
 			}
 			pokeList.splice(pokeIndex, 1);
 			getLetter();
+			save();
 		} else {
 			wrong();
 			console.log("Try again!");
@@ -54,4 +74,5 @@ input.onkeypress = function(e) {
 	}
 }
 
+load();
 getLetter();
