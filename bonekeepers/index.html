@@ -23,8 +23,8 @@
 		<select id="mode-select" onchange="switchMode(parseInt(modeSelect.value));">
 			<option value="0">None</option>
 			<option value="1">Twitch</option>
-			<option value="2">Chatango</option>
-			<option value="3" selected>Both</option>
+			<option value="2" selected>Chatango</option>
+			<option value="3">Both</option>
 		</select>
 		<iframe id="ustream"
 				src="http://www.ustream.tv/embed/21696031?html5ui"
@@ -41,8 +41,9 @@
 					frameborder="0" 
 					scrolling="no" 
 					id="chat_embed" 
-					style="width: 100%;"
+					style="width: 100%; display: none"
 					src="http://www.twitch.tv/vargskelethor/chat" 
+					
 					>
 			</iframe>
 			<!--iframe frameborder="0"
@@ -50,8 +51,8 @@
 					style="width: 100%; height: 50%"
 					src="chatango.html">
 			</iframe-->
-			<div id="chatango-wrapper" class="half-height">
-				<script id="cid0020000107759291039" data-cfasync="false" async src="http://st.chatango.com/js/gz/emb.js" style="width: 100%; height: 100%;">{"handle":"vinesaucemovies","arch":"js","styles":{"a":"1f1f1f","b":100,"c":"00aeef","d":"cccccc","e":"101010","f":71,"g":"f6f6f4","h":"171717","j":"ffffff","k":"666666","l":"252525","m":"ffffff","n":"dddddd","p":"10","q":"000000","r":100,"t":0,"ab":0,"usricon":0.75,"sbc":"bbbbbb","cnrs":"0.25","fwtickm":1}}</script>
+			<div id="chatango-wrapper" class="full-height">
+				<script id="cid0020000111473853715" data-cfasync="false" async src="http://st.chatango.com/js/gz/emb.js" style="width: 100%; height: 100%;">{"handle":"moogiees","arch":"js","styles":{"a":"1f1f1f","b":100,"c":"00aeef","d":"cccccc","e":"101010","f":71,"g":"f6f6f4","h":"171717","j":"ffffff","k":"666666","l":"252525","m":"ffffff","n":"dddddd","p":"10","q":"000000","r":100,"t":0,"ab":0,"usricon":0.75,"sbc":"bbbbbb","cnrs":"0.25","fwtickm":1}}</script>
 			</div>
 		</div>
 		<script src="main.js"></script>
