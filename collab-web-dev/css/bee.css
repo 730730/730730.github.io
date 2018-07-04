@@ -1,0 +1,43 @@
+/* begin BEES */ 
+.bee-link {
+  display: block;
+  position: fixed;
+  bottom: 80px;
+  height: 80px;
+  width: 80px;
+  animation: 5s cubic-bezier(0.20, 0, 0.80, 1) 0s infinite alternate none running left-to-right;
+}
+.bee-box {
+  display: block;
+  height: 100%;
+  width: 100%;
+  animation: 10s linear 0s infinite normal none running x-flip;
+}
+.bee-image {
+  display: block;
+  height: 100%;
+  animation: 1s ease-in-out 0s infinite alternate none running up-and-down;
+}
+@keyframes left-to-right {
+  from { transform: translateX(0vw) }
+  to   { transform: translateX(100vw); }
+}
+@keyframes x-flip {
+  0%    { transform: scaleX(1) }
+  49.9% { transform: scaleX(1) }
+  50%   { transform: scaleX(-1) }
+  99.9% { transform: scaleX(-1) }
+  100%  { transform: scaleX(1) }
+}
+@keyframes up-and-down {
+  from { transform: translateY(-160px); }
+  to   { transform: translateY(160px); }
+}
+/* end BEES */
+
+
+
+@keyframes hue-shift {
+  from { filter: contrast(150%) hue-rotate(0deg); }
+  to   { filter: contrast(150%) hue-rotate(360deg); }
+}
