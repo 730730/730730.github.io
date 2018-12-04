@@ -1,0 +1,18 @@
+<p>Nombre: <?=$this->mascota['nombre']?></p>
+<p>Especie: <?=$this->mascota['especie']?></p>
+<p>Raza: <?=$this->mascota['id_raza']?></p>
+<p>Sexo: <?=$this->mascota['sexo']?></p>
+<p>Peso: <?=$this->mascota['peso']?></p>
+<p>Edad: <?=$this->mascota['edad']?></p>
+<p>Cliente: <?=$this->mascota['id_cliente']?></p>
+<br>
+<table>
+<?php foreach ($this->turnos as $turno) { ?>
+    <tr>
+        <td><?=$turno['descripcion']?></td>
+        <td><?=$turno['fecha_horario']?></td>
+    </tr>
+<?php } ?>
+</table>
+<a href="PedirTurno.php?id=<?=$this->mascota['id_mascota']?>">Pedir turno para esta mascota.</a>
+

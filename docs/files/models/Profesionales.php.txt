@@ -1,0 +1,26 @@
+<?php
+/**
+*Modelo que permite interactuar con los Profesionales.
+*/
+class Profesionales extends Model {
+    /**
+    *  Obtiene los datos del Profesional con el e-mail y contraseña pasados como parámetros.
+    *  Usado principalmente para obtener el ID del Profesional que intenta loguearse.
+    *
+    *@param string $email Dirección de e-mail.
+    *@param string $pass Contraseña. Luego cifrada con SHA-1.
+    *@return array Datos del Profesional. Retorna NULL si el login es incorrecto o el Profesional no existe.
+    */
+    public function login($email, $pass) {
+        $nombre = $this->db->escapeString($nombre);
+        if (strlen($nombre) > 50) die("string too long");
+        $sha = sha1($pass);
+        $this->db->query("SELECT * FROM profesionales WHERE email = '$email' and password =  '$sha' LIMIT 1");
+        if ($this->db->numRows() > 0) {
+            return $this->db->fetch();
+        } else {
+            return NULL;
+        }
+    }
+}
+

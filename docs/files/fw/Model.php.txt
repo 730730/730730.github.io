@@ -1,0 +1,15 @@
+<?php
+
+/**
+*  Clase base para Modelo de MVC.
+*/
+abstract class Model {
+    /**
+    *Instancia de la base de datos.
+    */
+    protected $db;
+    public function __construct() {
+        $this->db = Database::getInstance();
+    }
+}
+

@@ -1,0 +1,10 @@
+<?php
+/**
+*  Formulario para sacar un turno.
+*/
+class PedirTurno extends View {
+    public $mascota;
+    public $id_cliente;
+    public $nombre_cliente;
+}
+

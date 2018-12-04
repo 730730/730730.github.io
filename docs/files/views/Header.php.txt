@@ -1,0 +1,8 @@
+<?php
+/**
+*  Cabecera general de HTML.
+*/
+class Header extends View {
+
+}
+

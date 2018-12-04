@@ -1,0 +1,11 @@
+<table>
+<?php foreach ($this->turnos as $turno) { ?>
+    <tr>
+        <td><a href="ModificarTurno.php?id=<?=$turno['id_turno']?>"><img src="../img/edit.png" alt="Modificar"></a></td>
+        <td><a href="PerfilMascota.php?id=<?=$turno['id_mascota']?>"><?=(new Mascotas)->getNombre($turno['id_mascota'])?></a></td>
+        <td><?=$turno['descripcion']?></td>
+        <td><?=$turno['fecha_horario']?></td>
+    </tr>
+<?php } ?>
+</table>
+

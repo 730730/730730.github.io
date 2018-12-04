@@ -1,0 +1,8 @@
+<?php
+/**
+*  Muestra un link hacia la lista de Turnos a un Profesional logueado.
+*/
+class PanelControlProfesional extends View {
+
+}
+

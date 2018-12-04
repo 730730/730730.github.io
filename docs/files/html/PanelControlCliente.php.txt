@@ -1,0 +1,8 @@
+<h1>Panel de control</h1>
+<ul>
+    <li><a href="RegistrarMascota.php">Registrar mascota</a></li>
+    <li><a href="PedirTurno.php">Sacar turno</a></li>
+    <li><a href="ListaTurnos.php">Ver turnos</a></li>
+    <li><a href="ListaMascotas.php">Ver mascotas</a></li>
+</ul>
+

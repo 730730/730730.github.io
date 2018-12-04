@@ -1,0 +1,10 @@
+<?php
+/**
+*  Incluir este archivo para integrar la funcionalidad del framework.
+*/
+session_start();
+
+require 'Database.php';
+require 'Model.php';
+require 'View.php';
+

@@ -1,0 +1,42 @@
+<?php
+/**
+*  Muestra una lista de mascotas a un Cliente logueado.
+*
+*  Mediante el parámetro 'nombre' se puede utilizar para mostrar resultados de búsqueda de Mascotas pertenecientes al Cliente logueado.
+*Si no se utiliza este parámetro, se muestran todas las Mascotas pertenecientes al Cliente logueado.
+*/
+require '../fw/fw.php';
+require '../models/Mascotas.php';
+require '../views/Header.php';
+require '../views/Footer.php';
+require '../views/ListaMascotas.php';
+require '../views/NavbarLoggedIn.php';
+require '../views/NavbarLoggedOut.php';
+
+(new Header)->render();
+
+if (isset($_SESSION['login'])) {
+    (new NavbarLoggedIn)->render();
+    $lista = new ListaMascotas;
+
+    if (isset($_GET['nombre'])) {
+        $mascotas = (new Mascotas)->buscar($_GET['nombre'], $_SESSION['id_cliente']);
+    } else {
+        $mascotas = (new Mascotas)->getMascotasCliente($_SESSION['id_cliente']);
+    }
+
+    if ($mascotas) {
+        $lista->mascotas = $mascotas;
+        $lista->render();
+    } else {
+        //cambiar esto para que se haga desde el render() de la lista
+        echo "Sin resultados.";
+    }
+} else {
+    header("Location: LoginCliente.php");
+    die();
+}
+
+
+(new Footer)->render();
+

@@ -1,0 +1,13 @@
+<h1><?=$this->mascota['nombre']?></h1>
+<h2><?=$this->nombre_cliente?></h2>
+<form action="PedirTurno.php" method="post">
+    <input type="date" name="date">
+    <input type="time" name="time">
+    <br>
+    <textarea name="descripcion" rows="8" cols="80" maxlength="300" placeholder="Ingrese una descripcion."></textarea>
+    <input type="hidden" name="id_cliente" value="<?=$this->id_cliente?>">
+    <input type="hidden" name="id_mascota" value="<?=$this->mascota['id_mascota']?>">
+    <br>
+    <input type="submit" value="Pedir turno">
+</form>
+

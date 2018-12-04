@@ -1,0 +1,9 @@
+<?php
+/**
+*  Termina la sesión de un Cliente y redirige a la página de login de Clientes.
+*/
+session_start();
+unset($_SESSION['login']);
+header('Location: LoginCliente.php');
+die();
+

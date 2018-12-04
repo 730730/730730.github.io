@@ -1,0 +1,96 @@
+<?php
+/**
+*Modelo que permite interactuar con los Turnos.
+*/
+class Turnos extends Model {
+    /**
+    *  Da de alta un nuevo Turno según los parámetros dados.
+    *@param string $fechaHorario Fecha y horario del turno, en formato 'YYYY-MM-DD hh:mm:ss'.
+    *@param string $descripcion Descripción del turno.
+    *@param integer $cliente ID del Cliente que saca el Turno.
+    *@param integer $mascota ID de la Mascota a la que le corresponde el Turno.
+    */
+    public function alta($fechaHorario, $descripcion, $cliente, $mascota) {
+        //TODO verificacion de datos
+        //DATETIME: 'YYYY-MM-DD HH:MM:SS'
+        $fechaHorario = $this->db->escapeString($fechaHorario);
+        $descripcion = $this->db->escapeString($descripcion);
+        if ($this->db->validateDatetime($fechaHorario) == NULL) die("invalid datetime");
+        if (strlen($descripcion) > 300) die("string too long");
+        if (!ctype_digit($cliente)) die("bad id");
+        if (!ctype_digit($mascota)) die("bad id");
+        $this->db->query("INSERT INTO turnos
+            (fecha_horario, descripcion, id_cliente, id_mascota)
+            VALUES('$fechaHorario', '$descripcion', '$cliente', '$mascota');");
+    }
+    /**
+    *  Da de baja un Turno.
+    *
+    *@param integer $id ID del Turno a dar de baja.
+    */
+    public function baja($id) {
+        if (!ctype_digit($id)) die("bad id");
+        $this->db->query("DELETE FROM turnos WHERE id_turno = $id");
+    }
+    /**
+    *  Modifica la fecha y horario de un turno existente.
+    *
+    *@param integer $id ID del Turno a modificar.
+    *@param string $fechaHorario Nueva fecha y horario del Turno, en formato 'YYYY-MM-DD hh:mm:ss'.
+    */
+    public function modificar($id, $fechaHorario) {
+        //TODO verificacion de datos
+        //TODO separacion de si lo hace un cliente o un veterinario
+        if (!ctype_digit($id)) die("bad id");
+        $fechaHorario = $this->db->escapeString($fechaHorario);
+        if ($this->db->validateDatetime($fechaHorario) == NULL) die("invalid datetime");
+        $this->db->query("UPDATE turnos
+            SET fecha_horario = '$fechaHorario'
+            WHERE id_turno = $id");
+    }
+    /**
+    *  Retorna los datos del Turno con el ID especificado
+    *
+    *@param integer $id ID del Turno buscado.
+    *@return array Datos del Turno buscado. Retorna NULL si el Turno especificado no existe.
+    */
+    public function getTurno($id) {
+        if (!ctype_digit($id)) die("bad id");
+        $this->db->query("SELECT * FROM turnos WHERE id_turno = $id LIMIT 1");
+        if ($this->db->numRows() > 0) {
+            return $this->db->fetch();
+        } else {
+            return NULL;
+        }
+    }
+    /**
+    *  Retorna los datos de todos los Turnos.
+    *
+    *@return array Todos los turnos existentes, y la información de cada uno.
+    */
+    public function getTurnos() {
+        $this->db->query("SELECT * FROM turnos");
+        if ($this->db->numRows() > 0) {
+            return $this->db->fetchAll();
+        } else {
+            return NULL;
+        }
+    }
+    /**
+    *  Retorna todos los turnos correspondientes al Cliente con el ID pasado por parámetro.
+    *
+    *@param integer $id ID del Cliente del que se buscan los Turnos.
+    *@return array Todos los turnos correspondientes al Cliente especificado, y los datos de cada uno de ellos. Retorna NULL si el Cliente no existe o no tiene Turnos.
+    */
+    public function getTurnosCliente($id) {
+        if (!ctype_digit($id)) die("bad id");
+        $this->db->query("SELECT * FROM turnos WHERE id_cliente = $id");
+        if ($this->db->numRows() > 0) {
+            return $this->db->fetchAll();
+        } else {
+            return NULL;
+        }
+    }
+
+}
+

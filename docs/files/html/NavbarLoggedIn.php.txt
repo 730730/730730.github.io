@@ -1,0 +1,8 @@
+<nav>
+    <form style="display: inline;" action="ListaMascotas.php" method="get">
+        <input type="search" name="nombre" placeholder="Buscar mascota">
+    </form>
+    <a href="PanelControlCliente.php">Volver al panel de control</a>
+    <a href="LogoutCliente.php">Log out</a>
+</nav>
+

@@ -1,0 +1,40 @@
+<?php
+/**
+*  Muestra formularios de registro y login de Clientes.
+*/
+require "../fw/fw.php";
+require "../models/Clientes.php";
+require "../views/LoginCliente.php";
+require '../views/Header.php';
+require '../views/Footer.php';
+
+(new Header)->render();
+
+//(new NavbarLoggedOut)->render();
+
+if (isset($_SESSION['login'])) {
+    header("Location: PanelControlCliente.php");
+}
+
+if (isset($_POST['register'])) {
+    //TODO validacion
+    (new Clientes)->alta($_POST["nombre"], $_POST["apellido"], $_POST["tipo-documento"], $_POST["num-documento"], $_POST["domicilio"], $_POST["telefono"], $_POST["email"], $_POST['pass']);
+    echo sha1($_POST['pass']);
+} elseif (isset($_POST['login'])) {
+    //TODO validacion
+    if ($cliente = (new Clientes)->login($_POST['email'], $_POST['pass'])) {
+        $_SESSION['login'] = true;
+        $_SESSION['id_cliente'] = $cliente['id_cliente'];
+        header('Location: PanelControlCliente.php');
+        die();
+    } else {
+        //poner parametros de la vista etc
+        echo "login incorrecto";
+    }
+
+}
+
+(new LoginCliente)->render();
+
+(new Footer)->render();
+

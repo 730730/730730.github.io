@@ -1,0 +1,21 @@
+<form class="" action="" method="post">
+    <input type="text" name="nombre" value="" placeholder="Nombre" required>
+    <select class="" name="sexo">
+        <option value="M">M</option>
+        <option value="F">F</option>
+    </select>
+    <br>
+    <input type="text" name="peso" value="" placeholder="Peso">kg
+    <br>
+    <input type="text" name="edad" value="" placeholder="Edad">
+    <br>
+    <select class="" name="especie">
+    <?php foreach ($this->especies as $especie) { ?>
+        <option value="<?=$especie['id_especie']?>"><?=$especie['nombre']?></option>
+    <?php } ?>
+    </select>
+    <input type="text" name="raza" value="" placeholder="Raza">
+    <br>
+    <input type="submit" name="" value="Registrar Mascota">
+</form>
+

@@ -1,0 +1,8 @@
+<?php
+/**
+*  Pie de página general de HTML.
+*/
+class Footer extends View {
+
+}
+

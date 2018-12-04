@@ -1,0 +1,8 @@
+<?php
+/**
+*  Página de error mostrada al intentar modificar un turno inexistente.
+*/
+class TurnoInvalido extends View {
+
+}
+

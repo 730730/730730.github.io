@@ -1,0 +1,10 @@
+<?php
+/**
+*  Lista de Mascotas.
+*
+*  Muestra nombre, dueño, y raza de la Mascota. El nombre es un link que lleva al perfil de la Mascota.
+*/
+class ListaMascotas extends View {
+    public $mascotas;
+}
+

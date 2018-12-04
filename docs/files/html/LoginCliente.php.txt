@@ -1,0 +1,38 @@
+<!--register-->
+<div style="float: left; border-right: 1px grey solid; padding-right: 50px;">
+    <h2>Registrarse</h2>
+    <form action="LoginCliente.php" method="post">
+        <input type="text" name="nombre" value="" placeholder="Nombre" maxlength="50" required>
+        <input type="text" name="apellido" value="" placeholder="Apellido" maxlength="50" required>
+        <br>
+        <select name="tipo-documento" required>
+            <option value="DNI">DNI</option>
+            <option value="CI">CI</option>
+            <option value="LE">LE</option>
+            <option value="LC">LC</option>
+            <option value="Pasaporte">Pasaporte</option>
+        </select>
+        <input type="text" name="num-documento" value="" placeholder="Núm. Documento" maxlength="20" required>
+        <br>
+        <input type="text" name="domicilio" value="" placeholder="Domicilio" maxlength="200" required>
+        <br>
+        <input type="tel" name="telefono" value="" placeholder="Teléfono" maxlength="20" required>
+        <br>
+        <input type="email" name="email" placeholder="E-Mail" required><br>
+        <input type="password" name="pass" placeholder="Contraseña" required><br>
+        <input type="hidden" name="register" value="">
+        <input type="submit" value="Registrarse">
+    </form>
+</div>
+
+<!--login-->
+<div style="float: left; margin-left: 50px;">
+    <h2>Login</h2>
+    <form action="LoginCliente.php" method="post">
+        <input type="email" name="email" placeholder="E-Mail" required><br>
+        <input type="password" name="pass" placeholder="Contraseña" required><br>
+        <input type="hidden" name="login" value="">
+        <input type="submit" value="Login">
+    </form>
+</div>
+

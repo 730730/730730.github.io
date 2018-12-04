@@ -1,0 +1,10 @@
+<?php
+/**
+*  Formulario para modificar la fecha y horario de un turno.
+*/
+class ModificarTurno extends View {
+    public $id_turno;
+    public $nombre_mascota;
+    public $nombre_cliente;
+}
+

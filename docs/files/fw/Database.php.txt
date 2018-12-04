@@ -1,0 +1,110 @@
+<?php
+/**
+*  Singleton utilizado para realizar operaciones con una base de datos específica.
+*/
+class Database {
+//singleton
+    /**
+    *Almacena el resultado de la última consulta realizada a través de query().
+    */
+    private $res;
+    /**
+    *Flag que indica si está establecida la conexión.
+    */
+    private $cn = false;
+    /**
+    *Flag que indica si se ha creado una instancia.
+    */
+    private static $instance = false;
+
+    //constructor privado no funciona
+    /**
+    *  Constructor inhabilitado para cumplir con el patrón singleton.
+    */
+    private function __construct(){}
+
+    //se hace una sola instancia de Databaase
+    /**
+    *  Retorna la instancia única de la base de datos, y la crea si no existe.
+    *
+    *@return object Instancia de la base de datos.
+    */
+    public static function getInstance() {
+        if(!self::$instance) self::$instance = new Database;
+        return self::$instance;
+    }
+    /**
+    *  Inicializa la conexión a la base de datos.
+    */
+    private function connect() {
+        $this->cn = mysqli_connect("localhost", "root", "", "veterinaria", 3306);
+        $this->query("SET names UTF8");
+    }
+    /**
+    *  Realiza una consulta a la base de datos, guardando el resultado en la instancia.
+    *
+    *@param string $q Consulta SQL a realizar.
+    */
+    public function query($q) {
+        if(!$this->cn) $this->connect();
+        $this->res = mysqli_query($this->cn, $q);
+        if(mysqli_error($this->cn) != "") die("query error $q - " . mysqli_error($this->cn));
+    }
+    /**
+    *  Retorna una fila del último resultado obtenido a través de query().
+    *
+    *@return array Fila correspondiente a una consulta a la base de datos.
+    */
+    public function fetch() {
+        return mysqli_fetch_assoc($this->res);
+    }
+    /**
+    *  Retorna la cantidad de filas del último resultado obtenido a través de query().
+    *
+    *@return integer Número de filas correspondientes a una consulta a la base de datos.
+    */
+    public function numRows() {
+        return mysqli_num_rows($this->res);
+    }
+    /**
+    *  Retorna todas las filas del último resultado obtenido a través de query().
+    *
+    *@return array Filas correspondientes a una consulta a la base de datos.
+    */
+    public function fetchAll() {
+        $aux = array();
+        while($fila = $this->fetch()) $aux[] = $fila;
+        return $aux;
+    }
+    /**
+    *  Escapa un string según los estándares de la base de datos.
+    *
+    *@param string $str String a escapar.
+    *@return string String escapada.
+    */
+    public function escapeString($str) {
+        if(!$this->cn) $this->connect();
+        return mysqli_escape_string($this->cn, $str);
+    }
+    /**
+    *  Retorna el ID de la última fila insertada en una consulta a la base de datos.
+    *
+    *@return integer ID de una fila en la base de datos.
+    */
+    public function insertID() {
+        return mysqli_insert_id($this->cn);
+    }
+    /**
+    *  Valida una fecha y hora según los estándares de la base de datos.
+    *
+    *  Utilizar junto con numRows() para verificar si una fecha es válida o no. Si el resultado no es mayor a 0 filas, la validación falló.
+    *@param string $datetime Fecha y hora.
+    *@return array Fila correspondiente a una consulta realizada para la validación.
+    */
+    public function validateDatetime($datetime) {
+        if(!$this->cn) $this->connect();
+        $this->query("SELECT day('$datetime')");
+        return $this->fetch();
+    }
+}
+

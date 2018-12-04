@@ -1,0 +1,127 @@
+<?php
+/**
+*  Modelo que permite interactuar con las Mascotas.
+*
+*  Se debe utilizar para obtener informacion de Mascotas, dar nuevas Mascotas
+*  de alta, y buscar Mascotas.
+*/
+class Mascotas extends Model {
+    /**
+    *Da de alta una nueva Mascota utilizando los parámetros provistos.
+    *
+    *@param string $nombre Nombre de la mascota.
+    *@param string $sexo Sexo de la mascota.
+    *@param float $peso Peso de la mascota.
+    *@param integer $edad Edad de la mascota.
+    *@param integer $cliente ID del Cliente dueño de la mascota.
+    *@param string $raza Nombre de la raza a la que pertenece la mascota.
+    *@param integer $especie ID de la especie a la que pertenece la mascota.
+    */
+    public function alta($nombre, $sexo, $peso, $edad, $cliente, $raza, $especie) {
+        //TODO verificacion de datos
+        //sacar cliente del login actual
+        //if ($raza != "") {
+        $raza = (new Razas)->getRazaID($raza, $especie);
+        $this->db->query("INSERT INTO mascotas
+            (nombre, sexo, peso, edad, id_cliente, id_raza)
+            VALUES('$nombre', '$sexo', $peso, $edad, $cliente, $raza);");
+        /*} else {
+            //si no tiene raza tampoco tiene especie!!!!!!
+            //ponerle una columna 'id_especie' a tabla mascotas o hacer una raza default para las especies que no tienen razas
+            $this->db->query("INSERT INTO mascotas
+                (nombre, sexo, peso, edad, id_cliente)
+                VALUES('$nombre', '$sexo', $peso, $edad, $cliente);");
+        }*/
+    }
+    /**
+    *Busca una mascota según los parámetros dados
+    *
+    *La búsqueda se realiza por nombre y por ID de cliente, y se retornan todas las Mascotas con un nombre similar a $nombre y que pertenezcan al Cliente con el ID $id.
+    *
+    *@param string $nombre Nombre por el que buscar a la Mascota.
+    *@param integer $id ID del Cliente al que debe pertenecer la mascota.
+    *@return array Todas las Mascotas que cumplen los criterios de búsqueda, y la información de cada una.
+    */
+    public function buscar($nombre, $id) {
+        $nombre = $this->db->escapeString($nombre);
+        if (strlen($nombre) > 50) die("string too long");
+        if (!ctype_digit($id)) die("bad id");
+        $this->db->query("SELECT * FROM mascotas WHERE nombre LIKE '$nombre%' AND id_cliente = $id");
+        return $this->db->fetchAll();
+    }
+    /**
+    *Retorna los datos de la Mascota con el ID provisto por parámetro.
+    *
+    *@param integer $id ID de una Mascota.
+    *@return array Datos de la Mascota con el ID provisto. Retorna NULL si no existe una Mascota con ese ID.
+    */
+    public function getMascota($id) {
+        if (!ctype_digit($id)) die("bad id");
+        $this->db->query("SELECT * FROM mascotas WHERE id_mascota = $id LIMIT 1");
+        if ($this->db->numRows() > 0) {
+            return $this->db->fetch();
+        } else {
+            return NULL;
+        }
+    }
+    /**
+    *Retorna las Mascotas pertenecientes al Cliente con el ID pasado por parámetro.
+    *
+    *@param integer $id ID de un Cliente.
+    *@return array Todas las Mascotas pertenecientes al Cliente con el ID especificado, y los datos de cada una. Retorna NULL si el Cliente no tiene Mascotas o si el Cliente no existe.
+    */
+    public function getMascotasCliente($id) {
+        if (!ctype_digit($id)) die("bad id");
+        $this->db->query("SELECT * FROM mascotas WHERE id_cliente = '$id'");
+        if ($this->db->numRows() > 0) {
+            return $this->db->fetchAll();
+        } else {
+            return NULL;
+        }
+    }
+    /**
+    *Retorna el nombre de la Mascota con el ID pasado por parámetro.
+    *
+    *@param integer $id ID de una Mascota.
+    *@return string Nombre de la Mascota con el ID especificado. Retorna NULL si no existe una Mascota con ese ID.
+    */
+    public function getNombre($id) {
+        if (!ctype_digit($id)) die("bad id");
+        $this->db->query("SELECT nombre FROM mascotas WHERE id_mascota = $id LIMIT 1");
+        if ($this->db->numRows() > 0) {
+            $r = $this->db->fetch();
+            return $r['nombre'];
+        } else {
+            return NULL;
+        }
+    }
+    /**
+    *Retorna el ID del Cliente dueño de la Mascota con el ID pasado por parámetro.
+    *
+    *@param integer $id ID de una Mascota.
+    *@return integer ID del Cliente dueño de la Mascota especificada. Retorna NULL si la Mascota especificada no existe.
+    */
+    public function getDueno($id) {
+        if (!ctype_digit($id)) die("bad id");
+        $this->db->query("SELECT id_cliente FROM mascotas WHERE id_mascota = $id LIMIT 1");
+        if ($this->db->numRows() > 0) {
+            $r = $this->db->fetch();
+            return $r['id_cliente'];
+        } else {
+            return NULL;
+        }
+    }
+    /**
+    *Retorna todos los Turnos de la Mascota con el ID pasado por parámetro.
+    *
+    *@param integer $id ID de una Mascota.
+    *@return array Todos los Turnos de la Mascota especificada, y los datos de cada uno.
+    */
+    public function getHistoriaClinica($id) {
+        if (!ctype_digit($id)) die("bad id");
+        $this->db->query("SELECT * FROM turnos
+            WHERE id_mascota = $id");
+        return $this->db->fetchAll();
+    }
+}
+

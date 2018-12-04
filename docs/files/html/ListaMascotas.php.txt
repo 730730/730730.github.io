@@ -1,0 +1,10 @@
+<table>
+<?php foreach ($this->mascotas as $mascota) { ?>
+    <tr>
+        <td><a href="PerfilMascota.php?id=<?=$mascota['id_mascota']?>"><?=$mascota['nombre']?></a></td>
+        <td><?=$mascota['id_cliente']?></td>
+        <td><?=$mascota['id_raza']?></td>
+    </tr>
+<?php } ?>
+</table>
+

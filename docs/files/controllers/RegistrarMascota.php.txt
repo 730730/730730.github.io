@@ -1,0 +1,32 @@
+<?php
+/**
+*  Muestra el formulario de registro de Mascota a un Cliente logueado, y realiza la alta de la Mascota.
+*/
+require "../fw/fw.php";
+require "../models/Clientes.php";
+require "../models/Mascotas.php";
+require "../models/Especies.php";
+require "../models/Razas.php";
+require '../views/Header.php';
+require '../views/Footer.php';
+require "../views/RegistrarMascota.php";
+require '../views/NavbarLoggedIn.php';
+
+(new Header)->render();
+
+if (isset($_SESSION['login'])) {
+    (new NavbarLoggedIn)->render();
+    if (isset($_POST["nombre"])) {
+        (new Mascotas)->alta($_POST["nombre"], $_POST["sexo"], $_POST["peso"], $_POST["edad"], $_SESSION['id_cliente'], $_POST["raza"], $_POST["especie"]);
+        header("Location: ListaMascotas.php");
+    }
+    $v = new RegistrarMascota;
+    $v->especies = (new Especies)->getAll();
+    $v->render();
+} else {
+    header("Location: LoginCliente.php");
+    die();
+}
+
+(new Footer)->render();
+

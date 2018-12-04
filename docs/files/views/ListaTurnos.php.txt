@@ -1,0 +1,11 @@
+<?php
+/**
+*  Lista que muestra información sobre Turnos.
+*
+*  Muestra la Mascota a la que corresponde el Turno, la descripción, y la fecha y horario.
+*El nombre de la Mascota es un link que lleva a su perfil, y a la izquierda de cada Turno se encuentra un ícono que lleva a la página que permite modificarlo.
+*/
+class ListaTurnos extends View {
+    public $turnos;
+}
+

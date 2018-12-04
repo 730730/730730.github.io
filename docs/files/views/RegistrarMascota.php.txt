@@ -1,0 +1,8 @@
+<?php
+/**
+*  Formulario presentado a un Cliente logueado para registrar una Mascota.
+*/
+class RegistrarMascota extends View {
+    public $especies;
+}
+

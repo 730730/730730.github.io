@@ -1,0 +1,8 @@
+<?php
+/**
+*  Mensaje de error cuando se intenta acceder el perfil de una Mascota inexistente.
+*/
+class PerfilMascotaVacio extends View {
+
+}
+

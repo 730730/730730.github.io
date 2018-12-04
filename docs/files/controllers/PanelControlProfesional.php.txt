@@ -1,0 +1,23 @@
+<?php
+/**
+*  Muestra el panel de control de profesionales a un Profesional logueado.
+*/
+require "../fw/fw.php";
+require "../models/Profesionales.php";
+require "../views/PanelControlProfesional.php";
+require '../views/Header.php';
+require '../views/Footer.php';
+require '../views/NavbarLoggedIn.php';
+
+(new Header)->render();
+
+if (isset($_SESSION['login-vet'])) {
+    (new NavbarLoggedIn)->render();
+    (new PanelControlProfesional)->render();
+} else {
+    header("Location: LoginProfesional.php");
+    die();
+}
+
+(new Footer)->render();
+

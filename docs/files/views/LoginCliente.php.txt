@@ -1,0 +1,8 @@
+<?php
+/**
+*  Formulario de registro y de login para Clientes.
+*/
+class LoginCliente extends View {
+
+}
+

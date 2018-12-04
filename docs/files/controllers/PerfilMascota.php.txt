@@ -1,0 +1,36 @@
+<?php
+/**
+*  Muestra el perfil de una Mascota específica a un Cliente logueado.
+*/
+require "../fw/fw.php";
+require '../models/Mascotas.php';
+require '../models/Clientes.php';
+require '../models/Especies.php';
+require '../models/Razas.php';
+require '../views/Header.php';
+require '../views/Footer.php';
+require '../views/NavbarLoggedIn.php';
+require '../views/PerfilMascota.php';
+require '../views/PerfilMascotaVacio.php';
+
+(new Header)->render();
+
+if (isset($_SESSION['login'])) {
+    (new NavbarLoggedIn)->render();
+    if (isset($_GET['id'])) {
+        $mascota = (new Mascotas)->getMascota($_GET['id']);
+        $turnos = (new Mascotas)->getHistoriaClinica($_GET['id']);
+        $v = new PerfilMascota;
+        $v->mascota = $mascota;
+        $v->turnos = $turnos;
+        $v->render();
+    } else {
+        $v = new PerfilMascotaVacio;
+    }
+} else {
+    header("Location: LoginCliente.php");
+    die();
+}
+
+(new Footer)->render();
+

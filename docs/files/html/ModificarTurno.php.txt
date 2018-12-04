@@ -1,0 +1,13 @@
+<p>Modificar turno de <?=$this->nombre_cliente?> para la mascota <?=$this->nombre_mascota?>.</p>
+<form action="ModificarTurno.php" method="post">
+    <input type="date" name="date">
+    <input type="time" name="time">
+    <input type="hidden" name="id_turno" value="<?=$this->id_turno?>">
+    <br>
+    <input type="submit" value="Modificar turno">
+</form>
+<form action="ModificarTurno.php" method="post">
+    <input type="hidden" name="id_turno_delete" value="<?=$this->id_turno?>">
+    <input type="submit" value="Cancelar turno">
+</form>
+

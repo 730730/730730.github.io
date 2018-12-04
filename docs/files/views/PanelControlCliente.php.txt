@@ -1,0 +1,10 @@
+<?php
+/**
+*  Muestra varias opciones a un Cliente logueado.
+*
+*  Muestra cuatro links a las siguientes opciones: Registrar mascota, pedir un turno, mostrar turnos, y lista de mascotas.
+*/
+class PanelControlCliente extends View {
+
+}
+

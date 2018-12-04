@@ -1,0 +1,8 @@
+<?php
+/**
+*  Muestra un mensaje de éxito luego de crear un Turno exitosamente.
+*/
+class ExitoTurno extends View {
+
+}
+

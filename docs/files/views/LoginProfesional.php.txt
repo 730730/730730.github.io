@@ -1,0 +1,8 @@
+<?php
+/**
+*  Formulario de login para Profesionales.
+*/
+class LoginProfesional extends View {
+
+}
+

@@ -1,0 +1,43 @@
+<?php
+/**
+*  Muestra un formulario para modificar un Turno, y envía la modificación del Turno.
+*/
+require '../fw/fw.php';
+require '../models/Mascotas.php';
+require '../models/Clientes.php';
+require '../models/Turnos.php';
+require '../views/Header.php';
+require '../views/Footer.php';
+require '../views/ModificarTurno.php';
+require '../views/TurnoInvalido.php';
+require '../views/ExitoTurno.php';
+
+(new Header)->render();
+
+if (isset($_GET['id'])) {
+    //TODO validacion
+    $turno = (new Turnos)->getTurno($_GET['id']);
+    unset($_GET['id']);
+    if ($turno != NULL) {
+        $v = new ModificarTurno;
+        $v->id_turno = $turno['id_turno'];
+        $v->nombre_mascota = (new Mascotas)->getNombre($turno['id_mascota']);
+        $v->nombre_cliente = (new Clientes)->getFullName($turno['id_cliente']);
+        $v->render();
+    } else {
+        (new TurnoInvalido)->render();
+    }
+} elseif (isset($_POST['id_turno'])) {
+    //TODO validacion
+    $datetime = $_POST['date'] . ' ' . $_POST['time'] . ':00';
+    (new Turnos)->modificar($_POST['id_turno'], $datetime);
+    (new ExitoTurno)->render();
+} elseif (isset($_POST['id_turno_delete'])) {
+    (new Turnos)->baja($_POST['id_turno_delete']);
+    (new ExitoTurno)->render();
+} else {
+    (new TurnoInvalido)->render();
+}
+
+(new Footer)->render();
+

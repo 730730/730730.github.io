@@ -1,0 +1,48 @@
+<?php
+/**
+*  Muestra el formulario para pedir un Turno para una Mascota específica a un Cliente logueado, y realiza la alta del Turno.
+*/
+require '../fw/fw.php';
+require '../models/Mascotas.php';
+require '../models/Clientes.php';
+require '../models/Turnos.php';
+require '../views/Header.php';
+require '../views/Footer.php';
+require '../views/NavbarLoggedIn.php';
+require '../views/PedirTurno.php';
+require '../views/ExitoTurno.php';
+require '../views/PerfilMascotaVacio.php';
+
+(new Header)->render();
+
+if (isset($_SESSION['login'])) {
+    (new NavbarLoggedIn)->render();
+    if (isset($_GET['id'])) {
+        $mascota = (new Mascotas)->getMascota($_GET['id']);
+        unset($_GET['id']);
+        if ($mascota != NULL) {
+            $nombre_cliente = (new Clientes)->getFullName($mascota['id_cliente']);
+            $v = new PedirTurno;
+            $v->mascota = $mascota;
+            $v->id_cliente = $mascota['id_cliente'];
+            $v->nombre_cliente = $nombre_cliente;
+            $v->render();
+        } else {
+            (new PerfilMascotaVacio)->render();
+        }
+    } elseif (isset($_POST['id_mascota'])) {
+        //TODO validacion
+        $datetime = $_POST['date'] . ' ' . $_POST['time'] . ':00';
+        (new Turnos)->alta($datetime, $_POST['descripcion'], $_POST['id_cliente'], $_POST['id_mascota']);
+        (new ExitoTurno)->render();
+    } else {
+        (new PerfilMascotaVacio)->render();
+    }
+} else {
+    header("Location: LoginCliente.php");
+    die();
+}
+
+
+(new Footer)->render();
+

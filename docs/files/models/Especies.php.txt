@@ -1,0 +1,16 @@
+<?php
+/**
+*Modelo que permite interactuar con las Especies.
+*/
+class Especies extends Model {
+    /**
+    *Retorna los datos de todas las Especies.
+    *
+    *@return array Contiene todas las Especies y los datos de cada una.
+    */
+    public function getAll() {
+        $this->db->query("SELECT * FROM especies");
+        return $this->db->fetchAll();
+    }
+}
+

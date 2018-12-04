@@ -1,0 +1,49 @@
+<?php
+/**
+*Modelo que permite interactuar con las Razas.
+*/
+class Razas extends Model {
+    /**
+    *  Retorna el ID de la Raza con un nombre similar al especificado y perteneciente a la Especie especificada.
+    *  Si la raza no existe, se crea.
+    *
+    *@param string $nombre Nombre de la Raza buscada.
+    *@param integer $especie ID de la Especie a la que debe pertenecer la Raza buscada.
+    *@return integer ID de la Raza buscada.
+    */
+    public function getRazaID($nombre, $especie) {
+        $nombre = $this->db->escapeString($nombre);
+        $nombre = str_replace(" ", "", $nombre);
+        $nombre = str_replace("-", "", $nombre);
+        if (strlen($nombre) > 50) die("string too long");
+        if (!ctype_digit($especie)) die("bad id");
+
+        $this->db->query("SELECT id_raza FROM razas WHERE nombre LIKE '$nombre' AND id_especie = $especie LIMIT 1");
+        if ($this->db->numRows() > 0) {
+            $aux = $this->db->fetch();
+            return $aux['id_raza'];
+        } else {
+            return $this->alta($nombre, $especie);
+        }
+    }
+
+    /**
+    *  Da de alta una Raza según los parámetros dados.
+    *
+    *@param string $nombre Nombre de la Raza.
+    *@param integer $especie ID de la Especie a la que pertenece la Raza.
+    *@return integer ID de la nueva Raza creada.
+    */
+
+    public function alta($nombre, $especie) {
+        $nombre = $this->db->escapeString($nombre);
+        $nombre = str_replace(" ", "", $nombre);
+        $nombre = str_replace("-", "", $nombre);
+        if (strlen($nombre) > 50) die("string too long");
+        if (!ctype_digit($especie)) die("bad id");
+
+        $this->db->query("INSERT INTO razas (nombre, id_especie) VALUES ('$nombre', $especie)");
+        return $this->db->insertID();
+    }
+}
+

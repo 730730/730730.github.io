@@ -1,0 +1,11 @@
+<?php
+/**
+*  Perfil de una Mascota específica.
+*
+*  Muestra el nombre, especie, raza, sexo, peso, edad, dueño, y la lista de turnos de una Mascota.
+*/
+class PerfilMascota extends View {
+    public $mascota;
+    public $turnos;
+}
+
